@@ -171,6 +171,33 @@ VALUES
 ('https://picsum.photos/id/308/600/600', 8, '2025-12-10 21:22:00', 5, 3, NULL),
 ('https://picsum.photos/id/309/600/600', 9, '2025-12-10 22:58:00', 5, 3, NULL);
 
+CREATE TABLE `chat_room` (
+  `room_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `chat_room_member` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `room_id` BIGINT NOT NULL,
+  `user_id` BIGINT NOT NULL,
+
+  PRIMARY KEY (`id`),
+
+  UNIQUE KEY `uk_room_user` (`room_id`, `user_id`),
+  KEY `idx_member_room` (`room_id`),
+  KEY `idx_member_user` (`user_id`),
+
+  CONSTRAINT `fk_member_room`
+    FOREIGN KEY (`room_id`) REFERENCES `chat_room`(`room_id`)
+    ON DELETE CASCADE,
+
+  CONSTRAINT `fk_member_user`
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 SELECT feed_id, COUNT(*) 
 FROM feed_images
