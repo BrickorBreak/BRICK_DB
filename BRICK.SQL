@@ -25,6 +25,12 @@ CREATE TABLE auth_users (
     PRIMARY KEY (auth_user_id)
 );
 
+INSERT INTO auth_users (user_id, id, pw, phone, gender) VALUES
+(1, 'dohyun',  '1111', '010-9000-0001', 'M'),
+(2, 'jieun',   '2222', '010-9000-0002', 'F'),
+(3, 'yeomdda', '3333', '010-9000-0003', 'M');
+
+
 CREATE TABLE food_category (
     food_category_id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
@@ -184,4 +190,5 @@ SELECT * FROM users;
 UPDATE feed_images
 SET food_category_id = NULL
 WHERE food_category_id = 0;
+
 
