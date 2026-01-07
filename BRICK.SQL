@@ -2,6 +2,11 @@ DROP DATABASE IF EXISTS brick;
 CREATE DATABASE brick;
 USE brick;
 
+CREATE USER IF NOT EXISTS 'ssafy'@'localhost' IDENTIFIED BY 'ssafy';
+GRANT ALL PRIVILEGES ON brick.* TO 'ssafy'@'localhost';
+FLUSH PRIVILEGES;
+
+
 CREATE TABLE users (
     user_id BIGINT NOT NULL,
     real_name VARCHAR(50),
